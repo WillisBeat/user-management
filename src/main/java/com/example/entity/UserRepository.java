@@ -14,8 +14,8 @@ public class UserRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Optional<User> getUserById(Long userId) {
-        return Optional.ofNullable(entityManager.find(User.class, userId));
+    public Optional<User> getUserByEmail(String email) {
+        return Optional.ofNullable(entityManager.find(User.class, email));
     }
 
     public void addUser(User user) {

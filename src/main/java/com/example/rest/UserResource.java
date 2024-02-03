@@ -30,9 +30,9 @@ public class UserResource {
 
     @GET
     @Path("/{userId}")
-    public User getUserById(@PathParam("userId") Long userId) {
+    public User getUserById(@PathParam("userId") String email) {
         logger.info("Getting user by id");
-        return userRepository.getUserById(userId)
+        return userRepository.getUserByEmail(email)
                 .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
     }
 
@@ -45,15 +45,15 @@ public class UserResource {
     }
 
     @PUT
-    @Path("/{userId}")
-    public String updateUser(@PathParam("userId") Long userId, User user) {
+    @Path("/{email}")
+    public String updateUser(@PathParam("email") String email, User user) {
         try {
-            logger.info("Updating user " + userId);
-            user.setId(userId);
+            logger.info("Updating user " + email);
+            user.setEmail(email);
             userRepository.updateUser(user);
             return "Success";
         } catch (PersistenceException ex) {
-            logger.info("Error updating user " + userId);
+            logger.info("Error updating user " + email);
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
     }

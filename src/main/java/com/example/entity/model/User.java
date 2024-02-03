@@ -5,31 +5,19 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "first_name")
     private String firstname;
     @Column(name = "last_name")
     private String lastname;
+    @Id
     private String email;
     @JsonbDateFormat("dd-MM-yyyy")
     private LocalDate birthday;
     private String password;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstname() {
         return firstname;
